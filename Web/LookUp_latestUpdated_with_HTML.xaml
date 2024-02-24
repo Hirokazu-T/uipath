@@ -1,15 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Get_latestnews_with_OpenAI" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="LookUp_latestUpdated_with_HTML" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_dtm_today" Type="InArgument(s:DateTime)" />
     <x:Property Name="out_bl_latestnews" Type="InArgument(x:Boolean)" />
     <x:Property Name="out_str_url" Type="InArgument(x:String)" />
   </x:Members>
-  <this:Get_latestnews_with_OpenAI.out_bl_latestnews>
+  <this:LookUp_latestUpdated_with_HTML.out_bl_latestnews>
     <InArgument x:TypeArguments="x:Boolean" />
-  </this:Get_latestnews_with_OpenAI.out_bl_latestnews>
-  <this:Get_latestnews_with_OpenAI.out_str_url>
+  </this:LookUp_latestUpdated_with_HTML.out_bl_latestnews>
+  <this:LookUp_latestUpdated_with_HTML.out_str_url>
     <InArgument x:TypeArguments="x:String" />
-  </this:Get_latestnews_with_OpenAI.out_str_url>
+  </this:LookUp_latestUpdated_with_HTML.out_str_url>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
@@ -114,7 +114,7 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_latestnews_with_OpenAI" sap:VirtualizedContainerService.HintSize="416,531" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="LookUp_latestUpdated_with_HTML" sap:VirtualizedContainerService.HintSize="416,531" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_today" />
       <Variable x:TypeArguments="x:String" Name="str_url" />
@@ -126,12 +126,12 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="today #月名# dd, yyyy" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="today d #月名# yyyy" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_15">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[str_today]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[in_dtm_today.ToString("#月名# dd, yyyy")]</InArgument>
+        <InArgument x:TypeArguments="x:String">[in_dtm_today.ToString("d #月名# yyyy")]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -140,14 +140,14 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="get short month name" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Utility\Get_ShortMonthName.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="get month name" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Utility\Get_MonthName.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="s:DateTime" x:Key="in_dtm_date">
           <VisualBasicValue x:TypeArguments="s:DateTime" ExpressionText="in_dtm_today" />
         </InArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_str_short_month_name">
-          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str_month_name" />
-        </OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="out_str_month_name">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_month_name" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -156,7 +156,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <Assign DisplayName="Replace Month Name" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Replace month name" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[str_today]</OutArgument>
       </Assign.To>
@@ -170,7 +170,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="Official_OpenAI_latest-news" CacheStrategy="None" DisplayName="アセットを取得" FolderPath="Home/900_共通/URL" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="OfficialDocument_HTML_Living-Standard" CacheStrategy="None" DisplayName="アセットを取得" FolderPath="Home/900_共通/URL" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:String">[str_url]</OutArgument>
       </ui:GetRobotAsset.Value>
@@ -181,7 +181,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:GetRobotAsset>
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="ブラウザーを使用 Edge: Blog" sap:VirtualizedContainerService.HintSize="354,75" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V2" WindowResize="Maximize">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Always" DisplayName="ブラウザーを使用 Edge: 最新情報 | STUDIO" sap:VirtualizedContainerService.HintSize="354,75" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V2" WindowResize="Maximize">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -194,9 +194,12 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NCheckState DisplayName="アプリのステートを確認 'Feb 14, 2024'" sap:VirtualizedContainerService.HintSize="354,77" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V3">
+            <uix:NCheckState DisplayName="アプリのステートを確認 'Living Standard'" sap:VirtualizedContainerService.HintSize="354,77" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V3">
               <uix:NCheckState.IfExists>
                 <Sequence DisplayName="ターゲットが出現" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="str_latestdate" />
+                  </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -258,7 +261,7 @@
                 </Sequence>
               </uix:NCheckState.IfNotExists>
               <uix:NCheckState.Target>
-                <uix:TargetAnchorable BrowserURL="https://openai.com/blog" CvTextArea="51, 1788, 154, 24" CvTextArgument="Feb 14, 2024" CvType="Text" DesignTimeRectangle="53, 1783, 150, 34" DesignTimeScaleFactor="1.5" ElementType="Text" FriendlyName="'Feb 14, 2024'" FullSelectorArgument="[&quot;&lt;webctrl tag='SPAN' aaname='&quot; &amp; str_today &amp; &quot;' /&gt;&quot;]" FuzzySelectorArgument="&lt;webctrl tag='SPAN' aaname='Feb 14, 2024' type='' class='' check:text='Feb 14, 2024' /&gt;" Guid="7399afee-c4c2-4651-addf-df321cf62e3a" InformativeScreenshot="1c916205c113fa6ef388148b3819369b.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='Blog' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                <uix:TargetAnchorable BrowserURL="https://html.spec.whatwg.org/" CvTextArea="75, 345, 904, 39" CvTextArgument="Living Standard - Last Updated 22 February 2024" CvType="Text" DesignTimeRectangle="77, 339, 1612, 51" DesignTimeScaleFactor="1.5" ElementType="Text" FriendlyName="'Living Standard'" FullSelectorArgument="[&quot;&lt;webctrl id='living-standard' tag='P' innertext='Living Standard — Last Updated &quot; &amp; str_today &amp; &quot;' /&gt;&quot;]" FuzzySelectorArgument="&lt;webctrl id='living-standard' tag='P' type='' class='' aaname='Living Standard — Last Updated ' check:text='Living Standard — Last Updated 22 February 2024' /&gt;" Guid="dd2505dd-91f2-4f9b-8ec4-908582879ad8" InformativeScreenshot="ae010e9399e14df7d7917fe5b39d85b6.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='HTML Standard' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" WaitForReadyArgument="Interactive" />
               </uix:NCheckState.Target>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -271,7 +274,7 @@
         </ActivityAction>
       </uix:NApplicationCard.Body>
       <uix:NApplicationCard.TargetApp>
-        <uix:TargetApp Area="1911, -503, 2178, 2840" BrowserType="Edge" IconBase64="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" InformativeScreenshot="ccbdfa06a7bfec0f24f159c7c9a70c01.jpg" Selector="&lt;html app='msedge.exe' title='Blog' /&gt;" Title="最新情報 | STUDIO" Url="[str_url]" />
+        <uix:TargetApp Area="1911, -503, 2178, 2840" BrowserType="Edge" IconBase64="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" InformativeScreenshot="8f0f71f445f3ac4e767a20dc2eb98f0c.jpg" Selector="&lt;html app='msedge.exe' title='HTML Standard' /&gt;" Title="最新情報 | STUDIO" Url="[str_url]" />
       </uix:NApplicationCard.TargetApp>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
