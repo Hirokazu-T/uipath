@@ -1,15 +1,15 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Get_latestnews_with_Studio" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Get_latestnews_with_Studio_blog" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_dtm_today" Type="InArgument(s:DateTime)" />
     <x:Property Name="out_bl_latestnews" Type="InArgument(x:Boolean)" />
     <x:Property Name="out_str_url" Type="InArgument(x:String)" />
   </x:Members>
-  <this:Get_latestnews_with_Studio.out_bl_latestnews>
+  <this:Get_latestnews_with_Studio_blog.out_bl_latestnews>
     <InArgument x:TypeArguments="x:Boolean" />
-  </this:Get_latestnews_with_Studio.out_bl_latestnews>
-  <this:Get_latestnews_with_Studio.out_str_url>
+  </this:Get_latestnews_with_Studio_blog.out_bl_latestnews>
+  <this:Get_latestnews_with_Studio_blog.out_str_url>
     <InArgument x:TypeArguments="x:String" />
-  </this:Get_latestnews_with_Studio.out_str_url>
+  </this:Get_latestnews_with_Studio_blog.out_str_url>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
@@ -109,25 +109,26 @@
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get_latestnews_with_Studio" sap:VirtualizedContainerService.HintSize="416,347" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_latestnews_with_Studio-blog" sap:VirtualizedContainerService.HintSize="416,81" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_today" />
       <Variable x:TypeArguments="x:String" Name="str_url" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="today yyyy.mm.dd" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="today yyyy/mm/dd" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[str_today]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[in_dtm_today.ToString("yyyy.MM.dd")]</InArgument>
+        <InArgument x:TypeArguments="x:String">[in_dtm_today.ToString("yyyy/MM/dd")]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -136,7 +137,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="Official_STUDIO_latest-news" CacheStrategy="None" DisplayName="アセットを取得" FolderPath="Home/900_共通/URL" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="OfficialBlog_STUDIO_latest-news" CacheStrategy="None" DisplayName="アセットを取得" FolderPath="Home/900_共通/URL" sap:VirtualizedContainerService.HintSize="354,92" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
       <ui:GetRobotAsset.Value>
         <OutArgument x:TypeArguments="x:String">[str_url]</OutArgument>
       </ui:GetRobotAsset.Value>
@@ -160,7 +161,7 @@
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NCheckState DisplayName="アプリのステートを確認 '最新情報'" sap:VirtualizedContainerService.HintSize="354,77" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V3">
+            <uix:NCheckState DisplayName="アプリのステートを確認 '2024/1/12'" sap:VirtualizedContainerService.HintSize="354,77" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="76e5620a-f600-4e0a-b4cc-db61d5d4f1ef" Version="V3">
               <uix:NCheckState.IfExists>
                 <Sequence DisplayName="ターゲットが出現" sap:VirtualizedContainerService.HintSize="450,81" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
@@ -224,7 +225,7 @@
                 </Sequence>
               </uix:NCheckState.IfNotExists>
               <uix:NCheckState.Target>
-                <uix:TargetAnchorable BrowserURL="https://studio.design/ja/whats-new" CvTextArea="855, 579, 385, 97" CvTextArgument="f*¿R" CvType="Text" DesignTimeRectangle="155, 562, 1786, 134" DesignTimeScaleFactor="1.5" ElementType="Text" FriendlyName="'最新情報'" FullSelectorArgument="[&quot;&lt;webctrl aaname='&quot; &amp; str_today &amp; &quot;' tag='P' /&gt;&quot;]" FuzzySelectorArgument="&lt;webctrl tag='P' aaname='最新情報' type='' class='text sd appear' check:text='最新情報' /&gt;" Guid="71c43c04-e2b8-43db-98c2-6618201e765f" InformativeScreenshot="20ad4e4177417cb0bf050115d286125f.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='最新情報 | STUDIO' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
+                <uix:TargetAnchorable BrowserURL="https://blog.studio.design/ja" CvTextArea="1293, 565, 105, 21" CvTextArgument="2024/1/12" CvType="Text" DesignTimeRectangle="1296, 562, 101, 29" DesignTimeScaleFactor="1.5" ElementType="Text" FriendlyName="'2024/1/12'" FullSelectorArgument="[&quot;&lt;webctrl tag='P' aaname='&quot; &amp; str_today &amp; &quot;' class='text sd appear' /&gt;&quot;]" FuzzySelectorArgument="&lt;webctrl tag='P' aaname='2024/1/12' class='text sd appear' type='' check:text='2024/1/12' /&gt;" Guid="1a131894-1280-4903-a674-993d6fdabb33" InformativeScreenshot="5b4487ea35b244e17bb78eca3a730a56.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='STUDIO Blog' /&gt;" SearchSteps="Selector" Version="V2" Visibility="Interactive" />
               </uix:NCheckState.Target>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -237,7 +238,7 @@
         </ActivityAction>
       </uix:NApplicationCard.Body>
       <uix:NApplicationCard.TargetApp>
-        <uix:TargetApp Area="1911, -503, 2178, 2840" BrowserType="Edge" IconBase64="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" InformativeScreenshot="8f0f71f445f3ac4e767a20dc2eb98f0c.jpg" Selector="&lt;html app='msedge.exe' title='最新情報 | STUDIO' /&gt;" Title="最新情報 | STUDIO" Url="[str_url]" />
+        <uix:TargetApp Area="1911, -503, 2178, 2840" BrowserType="Edge" IconBase64="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" InformativeScreenshot="8f0f71f445f3ac4e767a20dc2eb98f0c.jpg" Selector="&lt;html app='msedge.exe' title='STUDIO Blog' /&gt;" Title="最新情報 | STUDIO" Url="[str_url]" />
       </uix:NApplicationCard.TargetApp>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
